@@ -7,19 +7,19 @@ import DeleteBtn from "../../components/DeleteBtn";
 export default class Workouts extends React.Component {
   constructor(props) {
     super(props);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
 
     this.state = {
-      workouts: "",
+      workouts: [],
       workoutType: "",
       subworkout: [],
       Routine: "",
-      _id: ""
-    };
-
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.state = {
+      _id: "",
       collapsed: true
     };
+
+    // this.state = {
+    // };
   }
   componentDidMount() {
     this.loadWorkouts();
@@ -34,7 +34,11 @@ export default class Workouts extends React.Component {
       .catch(err => console.log(err));
   };
 
-
+  deleteWorkouts = id => {
+    API.deleteWorkouts(id)
+      .then(res => this.loadWorkouts())
+      .catch(err => console.log(err));
+  };
 
   toggleNavbar() {
     this.setState({
@@ -45,40 +49,36 @@ export default class Workouts extends React.Component {
     return (
       <div>
         <Navbar color="faded" light>
-          <NavbarBrand href="/" className="mr-auto"></NavbarBrand>
-
           {this.state.workouts.length ? (
-            <List>
-              {this.state.workouts.map(book => {
+            <div>
+              {this.state.workouts.map(workouts => {
                 return (
-                  <ListItem key={book._id}>
-                    <a href={"/workouts/" + workouts._id}>
-                      <strong>
-                        {workouts.title} by {workouts.author}
-                      </strong>
-                    </a>
-                    <DeleteBtn onClick={() => this.deleteBook(workouts._id)} />
-                  </ListItem>
+                  <div>
+                    <NavbarBrand href="/" className="mr-auto">{workouts.workoutType}</NavbarBrand>
+                    <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+                    <Collapse isOpen={!this.state.collapsed} navbar>
+                      <div key={workouts._id}>
+                        {/* <NavItem> */}
+                        {/* <a href={"/workouts/" + workouts._id}> */}
+                        {/* </a> */}
+                        <DeleteBtn onClick={() => this.deleteWorkouts(workouts._id)} />
+                        {/* </NavItem> */}
+                      </div>
+                      <Nav navbar>
+                        <NavItem>
+                          <NavLink href="">{workouts.subWorkout}</NavLink>
+                        </NavItem>
+                      </Nav>
+                    </Collapse>
+
+                  </div>
                 );
               })}
-            </List>
+            </div>
           ) : (
               <h3>No Results to Display</h3>
             )}
-          <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-          <Collapse isOpen={!this.state.collapsed} navbar>
-            <Nav navbar>
-              <NavItem>
-                <NavLink href="">Specific Workout</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="">Specific Workout</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="">Specific Workout</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
+
         </Navbar>
       </div>
     );

@@ -17,7 +17,6 @@ class Books extends React.Component {
     };
   }
 
-  // When the component mounts, load all books and save them to this.state.books
   componentDidMount() {
     this.loadBooks();
   }

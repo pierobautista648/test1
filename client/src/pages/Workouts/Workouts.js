@@ -36,13 +36,13 @@ export default class Example extends React.Component {
                <h1 className="lead">Choose Type of Workout</h1>
 
                <Dropdown1 />
-               <Dropdown2 />
+               {/* <Dropdown2 />
                <Dropdown3 />
                <Dropdown4 />
                <Dropdown5 />
                <Dropdown6 />
                <Dropdown7 />
-               <Dropdown8 />
+               <Dropdown8 /> */}
 
              </Jumbotron>
 
