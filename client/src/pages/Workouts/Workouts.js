@@ -61,11 +61,12 @@ export default class Workouts extends React.Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.workoutType && this.state.routine && this.state.subWorkout && this.state.workoutInfo) {
+    if (this.state.workoutType && this.state.routine && this.state.subWorkout && this.state.workoutInfo && this.state.youtubeId) {
       API.saveWorkouts({
         workoutType: this.state.workoutType,
         routine: this.state.routine,
         subWorkout: this.state.subWorkout,
+        youtubeId: this.state.youtubeId,
         workoutInfo: this.state.workoutInfo
       })
         .then(res => this.loadWorkouts())
@@ -158,6 +159,12 @@ export default class Workouts extends React.Component {
                     name="subWorkout"
                     placeholder="sub-workout (required)"
                   />
+                  <Input
+                    value={this.state.youtubeId}
+                    onChange={this.handleInputChange}
+                    name="youtubeId"
+                    placeholder="Youtube Id (required)"
+                  />
                   <TextArea
                     value={this.state.workoutInfo}
                     onChange={this.handleInputChange}
@@ -165,7 +172,7 @@ export default class Workouts extends React.Component {
                     placeholder="Description of workout (Required)"
                   />
                   <FormBtn
-                    disabled={!(this.state.workoutType && this.state.routine && this.state.subWorkout && this.state.workoutInfo)}
+                    disabled={!(this.state.workoutType && this.state.routine && this.state.subWorkout && this.state.workoutInfo && this.state.youtubeId)}
                     onClick={this.handleFormSubmit}
                   >
                     Submit Workout

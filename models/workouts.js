@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const workoutsSchema = new Schema({
   workoutType: { type: String, required: true },
+  youtubeId: { type: String, required: true },
   routine: { type: String, required: true },
   subWorkout: { type: Array, required: true },
   workoutInfo: { type: String, required: true },
