@@ -6,10 +6,7 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
 import { List, ListItem } from "../../components/List";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-<<<<<<< HEAD
 import InfoBtn from "../../components/InfoBtn";
-=======
->>>>>>> 39b653e49ed4064389d7a4ddc6325c5942723847
 import DeleteBtn from "../../components/DeleteBtn";
 
 export default class Workouts extends React.Component {
@@ -79,10 +76,6 @@ export default class Workouts extends React.Component {
     return (
       <Container>
         <Jumbotron body inverse style={{ backgroundColor: '#424242', borderColor: '#333' }}>
-<<<<<<< HEAD
-=======
-
->>>>>>> 39b653e49ed4064389d7a4ddc6325c5942723847
           <Row>
             <Col>
               <Jumbotron body inverse style={{ backgroundColor: '#616161 ', borderColor: '#333' }}>
@@ -95,27 +88,19 @@ export default class Workouts extends React.Component {
                         {this.state.workouts.map(workouts => {
                           return (
                             <div>
-<<<<<<< HEAD
 
                               <NavbarBrand href="/" className="mr-auto">{workouts.workoutType}</NavbarBrand>
 
                               <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
 
-=======
-                              <NavbarBrand href="/" className="mr-auto">{workouts.workoutType}</NavbarBrand>
-                              <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
->>>>>>> 39b653e49ed4064389d7a4ddc6325c5942723847
                               <Collapse isOpen={!this.state.collapsed} navbar>
                                 <div key={workouts._id}>
                                   {/* <NavItem> */}
                                   {/* <a href={"/workouts/" + workouts._id}> */}
                                   {/* </a> */}
-<<<<<<< HEAD
                                   <a href={"/workouts/" + workouts._id}>
                                     <InfoBtn onClick={() => this(workouts._id)} />
                                   </a>
-=======
->>>>>>> 39b653e49ed4064389d7a4ddc6325c5942723847
                                   <DeleteBtn onClick={() => this.deleteWorkouts(workouts._id)} />
                                   {/* </NavItem> */}
                                 </div>
@@ -180,11 +165,7 @@ export default class Workouts extends React.Component {
                     placeholder="Description of workout (Required)"
                   />
                   <FormBtn
-<<<<<<< HEAD
                     disabled={!(this.state.workoutType && this.state.routine && this.state.subWorkout && this.state.workoutInfo)}
-=======
-                    disabled={!(this.state.workoutType && this.state.routine && this.state.subworkout && this.state.workoutInfo)}
->>>>>>> 39b653e49ed4064389d7a4ddc6325c5942723847
                     onClick={this.handleFormSubmit}
                   >
                     Submit Workout
@@ -193,11 +174,7 @@ export default class Workouts extends React.Component {
 
               </Jumbotron>
             </Col>
-<<<<<<< HEAD
             {/* <Col>
-=======
-            <Col>
->>>>>>> 39b653e49ed4064389d7a4ddc6325c5942723847
               <div>
                 {this.state.workouts.length ? (
                   <div>
@@ -209,11 +186,7 @@ export default class Workouts extends React.Component {
                             <p className="lead">Category</p>
                             <hr className="my-2" />
                             <p>{workouts.workoutInfo}
-<<<<<<< HEAD
                             </p>
-=======
-                          </p>
->>>>>>> 39b653e49ed4064389d7a4ddc6325c5942723847
                             <p className="lead">
                             </p>
                           </Jumbotron>
@@ -227,11 +200,7 @@ export default class Workouts extends React.Component {
                   )}
 
               </div>
-<<<<<<< HEAD
             </Col> */}
-=======
-            </Col>
->>>>>>> 39b653e49ed4064389d7a4ddc6325c5942723847
           </Row>
         </Jumbotron>
 
