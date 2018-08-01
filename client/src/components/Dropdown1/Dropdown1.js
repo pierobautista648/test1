@@ -45,6 +45,24 @@ export default class Workouts extends React.Component {
       collapsed: !this.state.collapsed
     });
   }
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+  handleFormSubmit = event => {
+    event.preventDefault();
+    if (this.state.workouts && this.state.author) {
+      API.saveWorkouts({
+        workouts: this.state.workouts,
+        author: this.state.author,
+        synopsis: this.state.synopsis
+      })
+        .then(res => this.loadBooks())
+        .catch(err => console.log(err));
+    }
+  };
   render() {
     return (
       <div>

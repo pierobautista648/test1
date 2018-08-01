@@ -1,23 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../../components/Grid";
+import { Container, Row, Col } from 'reactstrap';
 import { Input, TextArea, FormBtn } from "../../components/Form";
-import Jumbotron from "../../components/Jumbotron";
+import { Jumbotron, Button } from 'reactstrap';
 import API from "../../utils/API";
+import UpdateBtn from "../../components/UpdateBtn";
+import CancelBtn from "../../components/CancelBtn";
 
 class Detail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      book: {},
+      workouts: {},
       isUpdate: false
     };
   }
-  // When this component mounts, grab the book with the _id of this.props.match.params.id
-  // e.g. localhost:3000/books/599dcb67f0f16317844583fc
+  // When this component mounts, grab the workouts with the _id of this.props.match.params.id
+  // e.g. localhost:3000/workouts/599dcb67f0f16317844583fc
   componentDidMount() {
-    API.getBook(this.props.match.params.id)
-      .then(res => this.setState({ book: res.data }))
+    API.getWorkout(this.props.match.params.id)
+      .then(res => this.setState({ workouts: res.data }))
       .catch(err => console.log(err));
   }
 
@@ -29,94 +31,108 @@ class Detail extends React.Component {
   handleInputChange = event => {
     const { name, value } = event.target;
 
-    const updatedBook = {...this.state.book}
-    updatedBook[name] = value
+    const updatedWorkouts = { ...this.state.workouts }
+    updatedWorkouts[name] = value
 
     this.setState({
-      book: updatedBook
+      workouts: updatedWorkouts
     });
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.book.title && this.state.book.author) {
-      API.patchBook(this.props.match.params.id, this.state.book)
-        .then(res => this.setState({isUpdate:false}))
+    if (this.state.workouts.workoutType && this.state.workouts.routine && this.state.workouts.subWorkout && this.state.workouts.workoutInfo) {
+      API.patchWorkouts(this.props.match.params.id, this.state.workouts)
+        .then(res => this.setState({ isUpdate: false }))
         .catch(err => console.log(err));
     }
   };
 
   getReadOnly = () => (
     <Container fluid>
-      <Row>
-        <Col size="md-12">
-          <Jumbotron>
-            <h1>
-              {this.state.book.title} by {this.state.book.author}
-            </h1>
-          </Jumbotron>
-        </Col>
-      </Row>
-      <Row>
-        <Col size="md-10 md-offset-1">
-          <article>
-            <h1>Synopsis</h1>
-            <p>
-              {this.state.book.synopsis}
+      <Jumbotron body inverse style={{ backgroundColor: '#616161 ', borderColor: '#333' }}>
+
+        <Row>
+          <Col size="md-12">
+            <h1 className="display-3">{this.state.workouts.workoutType}</h1>
+            <p className="lead">Category</p>
+
+          </Col>
+        </Row>
+        <Row>
+          <Col size="md-10 md-offset-1">
+            <hr className="my-2" />
+            <p>{this.state.workouts.workoutInfo}
             </p>
-          </article>
-        </Col>
-      </Row>
-      <Row>
-        <button onClick={() => this.handleUpdate(true)}>Update</button>
-        <Col size="md-2">
-          <Link to="/">← Back to Authors</Link>
-        </Col>
-      </Row>
+            <p className="lead">
+            </p>
+          </Col>
+        </Row>
+
+        <Row>
+          <div>
+            <UpdateBtn onClick={() => this.handleUpdate(true)}>Update</UpdateBtn>
+          </div>
+        </Row>
+
+        <Row>
+
+        </Row>
+
+
+      </Jumbotron>
+      <Col size="md-2">
+        <Link color="warning" to="/">⏎ Return to workouts</Link>
+      </Col>
     </Container>
   );
 
   getUpdateform = () => (
-    <Container fluid>
+    <Jumbotron body inverse style={{ backgroundColor: '#616161 ', borderColor: '#333' }}>
       <Row>
-        <Col size="md-12">
-          <Jumbotron>
-            <h1>What Books Should I Read?</h1>
-          </Jumbotron>
+        <Col>
+          <h1>Update Workout Information</h1>
         </Col>
       </Row>
       <Row>
-        <Col size="md-10 md-offset-1">
+        <Col>
           <form>
             <Input
-              value={this.state.book.title}
+              value={this.state.workouts.workoutType}
               onChange={this.handleInputChange}
-              name="title"
-              placeholder="Title (required)"
+              name="workoutType"
+              placeholder="Type of workout (required)"
             />
             <Input
-              value={this.state.book.author}
+              value={this.state.workouts.routine}
               onChange={this.handleInputChange}
-              name="author"
-              placeholder="Author (required)"
+              name="routine"
+              placeholder="Routine (required)"
+            />
+            <Input
+              value={this.state.workouts.subWorkout}
+              onChange={this.handleInputChange}
+              name="subWorkout"
+              placeholder="sub-workout (required)"
             />
             <TextArea
-              value={this.state.book.synopsis}
+              value={this.state.workouts.workoutInfo}
               onChange={this.handleInputChange}
-              name="synopsis"
-              placeholder="Synopsis (Optional)"
+              name="workoutInfo"
+              placeholder="Description of workout (Required)"
             />
-            <button onClick={() => this.handleUpdate(false)}>Cancel</button>
+
+            <CancelBtn onClick={() => this.handleUpdate(false)}>Cancel</CancelBtn>
             <FormBtn
-              disabled={!(this.state.book.author && this.state.book.title)}
+              disabled={!(this.state.workouts.workoutType && this.state.workouts.routine && this.state.workouts.subWorkout && this.state.workouts.workoutInfo)}
               onClick={this.handleFormSubmit}
             >
-              Submit Book
+              Submit Update
             </FormBtn>
           </form>
         </Col>
       </Row>
-    </Container>
+    </Jumbotron>
   );
 
   render() {

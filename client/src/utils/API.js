@@ -10,14 +10,14 @@ export default {
     return axios.delete("/api/workouts/" + id);
   },
   // Saves a book to the database
-  saveWorkouts: function (bookData) {
-    return axios.post("/api/workouts", bookData);
+  saveWorkouts: function (workoutsData) {
+    return axios.post("/api/workouts", workoutsData);
   },
   // Gets the book with the given id
   getWorkout: function (id) {
     return axios.get("/api/workouts/" + id);
   },
-  patchWorkout: function (id, bookData) {
-    return axios.patch("/api/workouts/" + id, bookData);
+  patchWorkouts: function (id, workoutsData) {
+    return axios.patch("/api/workouts/" + id, workoutsData);
   },
 };

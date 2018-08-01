@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const workoutSchema = new Schema({
-  routine: { type: String, required: true },
+const workoutsSchema = new Schema({
   workoutType: { type: String, required: true },
-  subWorkout: Array,
+  routine: { type: String, required: true },
+  subWorkout: { type: Array, required: true },
+  workoutInfo: { type: String, required: true },
   // date: { type: Date, default: Date.now }
 });
 
-const Workout = mongoose.model("Workouts", workoutSchema);
+const workouts = mongoose.model("workouts", workoutsSchema);
 
-module.exports = Workout;
+module.exports = workouts;
