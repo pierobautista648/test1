@@ -1,14 +1,17 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import YouPop from "../YouPop";
 
 class TextArea extends React.Component {
-// Destructuring the type, className, children and onClick props, applying them to the button element
+  // Destructuring the type, className, children and onClick props, applying them to the button element
 
-  render () {
+  render() {
 
     return (
       <div className="form-group">
-        <textarea className="form-control" rows="20" {...this.props} />
+        <textarea className="form-control" rows="12" {...this.props}
+        />                   
+
       </div>
     )
   }

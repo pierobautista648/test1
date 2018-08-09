@@ -4,31 +4,43 @@ import { Jumbotron, Button } from 'reactstrap';
 import Dropdown1 from "../../components/Dropdown1";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
-import { List, ListItem } from "../../components/List";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import InfoBtn from "../../components/InfoBtn";
 import DeleteBtn from "../../components/DeleteBtn";
+import YouPop from "../../components/YouPop";
+import Navv from "../../components/Navv";
 
 export default class Workouts extends React.Component {
   constructor(props) {
     super(props);
     this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.toggle = this.toggle.bind(this);
 
     this.state = {
+
       workouts: [],
       workoutType: "",
       subworkout: [],
       routine: "",
       _id: "",
-      collapsed: true
+      collapsed: true,
+      popoverOpen: false
+
     };
+
   }
+
+  toggle() {
+    this.setState({
+      popoverOpen: !this.state.popoverOpen
+    });
+  }
+
   //   this.toggleNavbar = this.toggleNavbar.bind(this);
   //   this.state = {
   //     collapsed: true
   //   };
   // }
-
   toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed
@@ -61,7 +73,7 @@ export default class Workouts extends React.Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.workoutType && this.state.routine && this.state.subWorkout && this.state.workoutInfo && this.state.youtubeId) {
+    if (this.state.workoutType && this.state.routine && this.state.subWorkout && this.state.youtubeId) {
       API.saveWorkouts({
         workoutType: this.state.workoutType,
         routine: this.state.routine,
@@ -73,27 +85,31 @@ export default class Workouts extends React.Component {
         .catch(err => console.log(err));
     }
   };
+
   render() {
     return (
       <Container>
-        <Jumbotron body inverse style={{ backgroundColor: '#424242', borderColor: '#333' }}>
+
+
+        <Navv />
+        <Jumbotron body inverse style={{ backgroundColor: '#2E2E2E', borderColor: '#333' }}>
           <Row>
             <Col>
-              <Jumbotron body inverse style={{ backgroundColor: '#616161 ', borderColor: '#333' }}>
+              <Jumbotron body inverse style={{ backgroundColor: '#616161', borderColor: '#333' }}>
                 <h1 className="lead">Choose Type of Workout</h1>
-
                 <div>
-                  <Navbar color="faded" light>
-                    {this.state.workouts.length ? (
-                      <div>
-                        {this.state.workouts.map(workouts => {
-                          return (
-                            <div>
+                  {this.state.workouts.length ? (
+                    <div>
+                      {this.state.workouts.map(workouts => {
+                        return (
+                          <div>
+                            <Navbar color="faded" light>
 
                               <NavbarBrand href="/" className="mr-auto">{workouts.workoutType}</NavbarBrand>
 
-                              <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
 
+                              <NavbarToggler className="mr-2" onClick={this.toggleNavbar} />
+                              {/* <NavbarSwitch onClick={this.toggleNavbar} /> */}
                               <Collapse isOpen={!this.state.collapsed} navbar>
                                 <div key={workouts._id}>
                                   {/* <NavItem> */}
@@ -111,31 +127,31 @@ export default class Workouts extends React.Component {
                                   </NavItem>
                                 </Nav>
                               </Collapse>
+                            </Navbar>
 
-                            </div>
-                          );
-                        })}
-                      </div>
-                    ) : (
-                        <h3>No Results to Display</h3>
-                      )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                      <h3>No Results to Display</h3>
+                    )}
 
-                  </Navbar>
                 </div>
 
               </Jumbotron>
 
             </Col>
-            <Col>
+            {/* <Col>
               <div>
                 <Jumbotron body inverse style={{ backgroundColor: '#616161 ', borderColor: '#333' }}>
                   <h1 className="display-3">Video Here</h1>
                 </Jumbotron>
               </div>
-            </Col>
-          </Row>
+            </Col> */}
+            {/* </Row> */}
 
-          <Row>
+            {/* <Row> */}
             <Col>
               <Jumbotron body inverse style={{ backgroundColor: '#616161 ', borderColor: '#333' }}>
                 <h1 className="lead">Choose Type of Workout</h1>
@@ -159,20 +175,25 @@ export default class Workouts extends React.Component {
                     name="subWorkout"
                     placeholder="sub-workout (required)"
                   />
-                  <Input
-                    value={this.state.youtubeId}
-                    onChange={this.handleInputChange}
-                    name="youtubeId"
-                    placeholder="Youtube Id (required)"
-                  />
+                  <div>
+                    <YouPop />
+
+                    <Input
+                      value={this.state.youtubeId}
+                      onChange={this.handleInputChange}
+                      name="youtubeId"
+                      placeholder="Youtube Id (required)"
+
+                    />
+                  </div>
                   <TextArea
                     value={this.state.workoutInfo}
                     onChange={this.handleInputChange}
                     name="workoutInfo"
-                    placeholder="Description of workout (Required)"
+                    placeholder="Description of workout (Optional)"
                   />
                   <FormBtn
-                    disabled={!(this.state.workoutType && this.state.routine && this.state.subWorkout && this.state.workoutInfo && this.state.youtubeId)}
+                    disabled={!(this.state.workoutType && this.state.routine && this.state.subWorkout && this.state.youtubeId)}
                     onClick={this.handleFormSubmit}
                   >
                     Submit Workout
@@ -211,7 +232,7 @@ export default class Workouts extends React.Component {
           </Row>
         </Jumbotron>
 
-      </Container >
+      </ Container >
 
     );
   }

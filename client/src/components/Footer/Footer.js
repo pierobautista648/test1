@@ -6,7 +6,6 @@ export default class Example extends React.Component {
   render() {
     return (
       <Container>
-        <p>List Based</p>
         <Row>
           <Col>
 

@@ -6,7 +6,7 @@ const workoutsSchema = new Schema({
   youtubeId: { type: String, required: true },
   routine: { type: String, required: true },
   subWorkout: { type: Array, required: true },
-  workoutInfo: { type: String, required: true },
+  workoutInfo: { type: String, required: false },
   // date: { type: Date, default: Date.now }
 });
 

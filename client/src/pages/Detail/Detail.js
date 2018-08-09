@@ -46,7 +46,7 @@ class Detail extends React.Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.workouts.workoutType && this.state.workouts.routine && this.state.workouts.subWorkout && this.state.workouts.workoutInfo && this.state.workouts.youtubeId) {
+    if (this.state.workouts.workoutType && this.state.workouts.routine && this.state.workouts.subWorkout && this.state.workouts.youtubeId) {
       API.patchWorkouts(this.props.match.params.id, this.state.workouts)
         .then(res => this.setState({ isUpdate: false }))
         .catch(err => console.log(err));
@@ -59,18 +59,18 @@ class Detail extends React.Component {
       <Jumbotron body inverse style={{ backgroundColor: '#616161 ', borderColor: '#333' }}>
 
         <Row>
-          <Col size="md-12">
+          <Col>
             <h1 className="display-3">{this.state.workouts.workoutType}</h1>
-            <p className="lead">Category</p>
+            <p className="lead">({this.state.workouts.subWorkout})</p>
 
           </Col>
         </Row>
         <Row>
           <Col>
-            <hr className="my-2" />
+            <hr/>
             <p>{this.state.workouts.workoutInfo}
             </p>
-            <p className="lead">
+            <p>
             </p>
           </Col>
           {/* <Col>
@@ -129,7 +129,7 @@ class Detail extends React.Component {
               name="subWorkout"
               placeholder="sub-workout (required)"
             />
-             <Input
+            <Input
               value={this.state.workouts.youtubeId}
               onChange={this.handleInputChange}
               name="youtubeId"
@@ -139,12 +139,12 @@ class Detail extends React.Component {
               value={this.state.workouts.workoutInfo}
               onChange={this.handleInputChange}
               name="workoutInfo"
-              placeholder="Description of workout (Required)"
+              placeholder="Description of workout (Optional)"
             />
 
             <CancelBtn onClick={() => this.handleUpdate(false)}>Cancel</CancelBtn>
             <FormBtn
-              disabled={!(this.state.workouts.workoutType && this.state.workouts.routine && this.state.workouts.subWorkout && this.state.workouts.workoutInfo && this.state.workouts.youtubeId)}
+              disabled={!(this.state.workouts.workoutType && this.state.workouts.routine && this.state.workouts.subWorkout && this.state.workouts.youtubeId)}
               onClick={this.handleFormSubmit}
             >
               Submit Update
@@ -174,7 +174,7 @@ class Detail extends React.Component {
           <Row>
             <Col size="md-12">
               <h1 className="display-3">{this.state.workouts.workoutType}</h1>
-              <p className="lead">Category</p>
+              <p className="lead">({this.state.workouts.subWorkout})</p>
 
             </Col>
           </Row>

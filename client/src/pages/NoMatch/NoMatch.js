@@ -1,6 +1,6 @@
 import React from "react";
-import { Col, Row, Container } from "../../components/Grid";
 import Jumbotron from "../../components/Jumbotron";
+import { Container, Row, Col } from 'reactstrap';
 
 class NoMatch extends React.Component {
 
@@ -9,10 +9,11 @@ class NoMatch extends React.Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-12">
+          <Col sm="12" md={{ size: 8, offset: 2 }}>
             <Jumbotron>
-              <h1>404 Page Not Found</h1>
-              <h1>
+              <h1 className="text-center">404 Page Not Found</h1>
+              <p className="text-center">(You Done Goofed up Fam)</p>
+              <h1 className="text-center">
                 <span role="img" aria-label="Face With Rolling Eyes Emoji">
                   🙄
                 </span>
