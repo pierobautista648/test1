@@ -11,13 +11,13 @@ export default class Example extends React.Component {
 
             <Nav vertical>
               <NavItem>
-                <NavLink href="#"><p className="text-danger"> Link </p></NavLink>
+                <NavLink href="https://www.youtube.com/"><p className="YouTube"> Link </p></NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#"><p className="text-danger"> Another Link </p></NavLink>
+                <NavLink href="https://www.bodybuilding.com/store/top50.htm"><p className="text-danger"> Supplements </p></NavLink>
               </NavItem>
               <NavItem>
-                <NavLink disabled href="#"><p> SOME INFO </p></NavLink>
+                <NavLink href="https://www.bodybuilding.com/store/dietweight.html"><p> Dieting </p></NavLink>
               </NavItem>
             </Nav>
 
@@ -26,13 +26,10 @@ export default class Example extends React.Component {
             <Nav vertical>
 
               <NavItem>
-                <NavLink disabled href="#"><p> SOME INFO SOME INFO SOME INFO SOME INFO
-                SOME INFO SOME INFO SOME INFO SOME INFO SOME INFO SOME INFO SOME INFO
-                SOME INFO SOME INFO SOME INFO SOME INFO SOME INFO SOME INFO SOME INFO
-              SOME INFO SOME INFO SOME INFO SOME INFO SOME INFO SOME INFO SOME INFO </p></NavLink>
+                <NavLink disabled href="#"><p> Results may vary from person to person</p></NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#"><p className="text-danger"> @ThisIsACopyRight </p></NavLink>
+                <NavLink href="#"><p className="text-danger"> @BurnOut </p></NavLink>
               </NavItem>
             </Nav>
 
